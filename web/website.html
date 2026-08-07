@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Divya Travels | </title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root{
+  --yellow:#FFC72C;
+  --yellow-dark:#F2A900;
+  --yellow-light:#FFE29A;
+  --ink:#181818;
+  --ink-soft:#3a3a3a;
+  --gray:#6b6b6b;
+  --line:#eee;
+  --white:#ffffff;
+  --off:#FFFBF0;
+  --success:#1F9D55;
+  --danger:#E5484D;
+  --shadow:0 8px 28px rgba(0,0,0,0.08);
+  --shadow-lg:0 16px 44px rgba(0,0,0,0.14);
+  --radius:16px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Poppins',sans-serif;background:var(--white);color:var(--ink);overflow-x:hidden;}
+::-webkit-scrollbar{width:8px;} ::-webkit-scrollbar-thumb{background:var(--yellow-dark);border-radius:4px;}
+h1,h2,h3,h4{font-family:'Playfair Display',serif;}
+a{text-decoration:none;color:inherit;}
+button{font-family:'Poppins',sans-serif;}
+img{max-width:100%;display:block;}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+.fade{animation:fadeUp .6s ease forwards;}
+
+/* ===== HEADER / NAV ===== */
+.topbar{background:var(--ink);color:#ddd;font-size:12.5px;padding:7px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;}
+.topbar a{color:#ddd;}
+.topbar .exp-pill{background:var(--yellow);color:var(--ink);font-weight:700;padding:3px 12px;border-radius:20px;font-size:11.5px;}
+.navbar{position:sticky;top:0;z-index:1000;background:var(--white);box-shadow:var(--shadow);padding:12px 20px;}
+.nav-inner{max-width:1300px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px;}
+.brand{display:flex;align-items:center;gap:10px;cursor:pointer;}
+.brand-badge{width:46px;height:46px;border-radius:12px;background:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--ink);box-shadow:0 4px 14px rgba(242,169,0,0.4);overflow:hidden;}
+.brand-badge img{width:100%;height:100%;object-fit:contain;}
+.brand h1{font-size:19px;color:var(--ink);line-height:1.1;}
+.brand span{font-size:10.5px;color:var(--gray);font-weight:600;letter-spacing:1.5px;display:block;text-transform:uppercase;}
+.nav-links{display:flex;gap:4px;}
+.nav-links a{padding:9px 15px;border-radius:22px;font-size:13.5px;font-weight:600;color:var(--ink-soft);transition:.25s;}
+.nav-links a:hover{background:var(--off);}
+.nav-links a.active{background:var(--ink);color:var(--yellow);}
+.nav-actions{display:flex;align-items:center;gap:8px;}
+.icon-btn{position:relative;width:40px;height:40px;border-radius:50%;background:var(--off);border:none;color:var(--ink);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s;}
+.icon-btn:hover{background:var(--yellow-light);}
+.badge-dot{position:absolute;top:-2px;right:-2px;background:var(--danger);color:#fff;font-size:9.5px;font-weight:800;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;}
+.btn-login{background:var(--ink);color:var(--yellow);border:none;padding:10px 22px;border-radius:24px;font-weight:700;font-size:13.5px;cursor:pointer;transition:.2s;}
+.btn-login:hover{background:#000;}
+.mobile-menu-btn{display:none;background:none;border:none;font-size:22px;color:var(--ink);cursor:pointer;}
+
+/* Notification dropdown */
+.notif-panel{position:fixed;top:96px;right:20px;width:340px;max-height:70vh;overflow-y:auto;background:#fff;border-radius:16px;box-shadow:var(--shadow-lg);z-index:3000;display:none;}
+.notif-panel.show{display:block;}
+.notif-head{padding:14px 18px;font-weight:700;border-bottom:1px solid var(--line);font-family:'Playfair Display',serif;color:var(--ink);}
+.notif-row{padding:13px 18px;border-bottom:1px solid #f5f5f5;font-size:13px;}
+.notif-row b{display:block;margin-bottom:2px;color:var(--ink);}
+.notif-row span{color:var(--gray);font-size:12px;}
+
+/* ===== MOBILE NAV ===== */
+.mobile-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1999;opacity:0;visibility:hidden;transition:.3s;}
+.mobile-overlay.active{opacity:1;visibility:visible;}
+.mobile-nav{position:fixed;top:0;left:-100%;width:78%;max-width:320px;height:100vh;background:#fff;z-index:2000;padding:24px;transition:.35s;box-shadow:6px 0 30px rgba(0,0,0,.2);}
+.mobile-nav.active{left:0;}
+.mobile-nav a{display:flex;align-items:center;gap:12px;padding:14px 6px;color:var(--ink);font-weight:600;font-size:15px;border-bottom:1px solid var(--line);}
+.mobile-nav a i{color:var(--yellow-dark);width:20px;}
+
+/* ===== SECTIONS ===== */
+.page-section{display:none;}
+.page-section.active{display:block;}
+.wrap{max-width:1300px;margin:0 auto;padding:0 20px;}
+.section-pad{padding:70px 0;}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--yellow-light);color:#7A5B00;font-weight:700;font-size:12px;letter-spacing:1px;text-transform:uppercase;padding:6px 16px;border-radius:20px;margin-bottom:14px;}
+.sec-title{font-size:34px;color:var(--ink);margin-bottom:10px;}
+.sec-sub{color:var(--gray);font-size:15px;max-width:600px;}
+
+/* ===== HERO / HOME ===== */
+.hero{background:linear-gradient(180deg,var(--ink) 0%,#232323 100%);position:relative;padding:60px 20px 130px;overflow:hidden;color:#fff;}
+.hero::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:60px;background:var(--white);border-radius:50% 50% 0 0/100% 100% 0 0;}
+.hero-grid{max-width:1300px;margin:0 auto;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;position:relative;z-index:2;}
+.hero h2{font-size:44px;line-height:1.18;margin-bottom:16px;}
+.hero h2 span{color:var(--yellow);}
+.hero p{color:#ccc;font-size:15.5px;margin-bottom:10px;max-width:480px;}
+.hero-badges{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap;}
+.hero-badge{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);padding:8px 14px;border-radius:20px;font-size:12.5px;}
+.hero-badge i{color:var(--yellow);}
+.hero-img{border-radius:20px;overflow:hidden;box-shadow:var(--shadow-lg);animation:float 4s ease-in-out infinite;}
+.hero-img img{width:100%;height:340px;object-fit:cover;}
+
+/* search card */
+.search-card{max-width:1000px;margin:-90px auto 0;background:#fff;border-radius:22px;box-shadow:var(--shadow-lg);padding:26px;position:relative;z-index:5;}
+.search-title{font-size:16px;font-weight:700;color:var(--ink);margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+.search-title i{color:var(--yellow-dark);}
+.search-row{display:grid;grid-template-columns:1fr 1fr auto;gap:12px;}
+.search-field{position:relative;}
+.search-field i.f-ico{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--yellow-dark);font-size:15px;}
+.search-field input{width:100%;padding:15px 15px 15px 42px;border:1.5px solid var(--line);border-radius:12px;font-size:14px;font-family:'Poppins',sans-serif;background:var(--off);outline:none;transition:.2s;}
+.search-field input:focus{border-color:var(--yellow-dark);background:#fff;}
+.btn-search{background:var(--yellow);color:var(--ink);border:none;padding:0 30px;border-radius:12px;font-weight:800;font-size:14.5px;cursor:pointer;display:flex;align-items:center;gap:8px;transition:.2s;white-space:nowrap;}
+.btn-search:hover{background:var(--yellow-dark);transform:translateY(-2px);}
+.search-note{font-size:11.5px;color:var(--gray);margin-top:10px;}
+@media (max-width:800px){.search-row{grid-template-columns:1fr;} .hero-grid{grid-template-columns:1fr;} .hero-img{display:none;} .hero h2{font-size:32px;}}
+
+/* stats */
+.stats-strip{background:var(--off);padding:44px 20px;}
+.stats-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:20px;text-align:center;}
+.stat-box{background:#fff;border-radius:16px;padding:22px 10px;box-shadow:var(--shadow);}
+.stat-box i{font-size:24px;color:var(--yellow-dark);margin-bottom:8px;display:block;}
+.stat-box h3{font-size:30px;color:var(--ink);font-family:'Playfair Display',serif;}
+.stat-box p{font-size:12.5px;color:var(--gray);font-weight:600;margin-top:2px;}
+@media (max-width:700px){.stats-grid{grid-template-columns:repeat(2,1fr);}}
+
+/* vehicle cards */
+.veh-img-wrap{
+  width:100%;
+  height:80px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-bottom:8px;
+}
+.veh-img{
+  max-width:100%;
+  max-height:100%;
+  object-fit:contain;
+}
+.veh-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:20px;}
+.veh-card{background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:12px;text-align:center;transition:.25s;cursor:pointer;width:250px;}
+.veh-card:hover{border-color:var(--yellow-dark);box-shadow:var(--shadow-lg);transform:translateY(-6px);}
+.veh-emoji{font-size:44px;margin-bottom:10px;}
+.veh-card h4{font-size:14px;color:var(--ink);margin-bottom:3px;}
+.veh-card .seats{font-size:11px;color:var(--gray);margin-bottom:6px;}
+.veh-price{font-size:16px;font-weight:800;color:var(--ink);}
+.veh-price span{font-size:11.5px;font-weight:500;color:var(--gray);}
+.btn-veh-book{margin-top:8px;width:100%;background:var(--ink);color:var(--yellow);border:none;padding:9px;border-radius:20px;font-weight:700;font-size:11.5px;cursor:pointer;transition:.2s;}
+.btn-veh-book:hover{background:#000;}
+@media (max-width:900px){.veh-grid{grid-template-columns:repeat(2,1fr);}}
+
+/* map card */
+.map-card{border-radius:22px;overflow:hidden;box-shadow:var(--shadow-lg);border:6px solid var(--yellow);}
+.map-card iframe{width:100%;height:360px;border:0;display:block;}
+.map-flex{display:grid;grid-template-columns:.9fr 1.1fr;gap:40px;align-items:center;}
+@media (max-width:900px){.map-flex{grid-template-columns:1fr;}}
+.map-point{display:flex;gap:12px;align-items:flex-start;margin-bottom:16px;}
+.map-point i{width:34px;height:34px;border-radius:50%;background:var(--yellow-light);color:#7A5B00;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+
+/* package preview cards on home */
+.pkg-mini-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.pkg-mini{border-radius:18px;overflow:hidden;box-shadow:var(--shadow);cursor:pointer;position:relative;transition:.25s;}
+.pkg-mini:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);}
+.pkg-mini img{height:180px;object-fit:cover;width:100%;}
+.pkg-mini-info{padding:16px;background:#fff;}
+.pkg-mini-info h4{font-size:15.5px;color:var(--ink);margin-bottom:4px;}
+.pkg-mini-info p{font-size:12.5px;color:var(--gray);}
+@media (max-width:900px){.pkg-mini-grid{grid-template-columns:1fr;}}
+
+/* ===== ABOUT ===== */
+.about-hero{background:var(--ink);color:#fff;padding:60px 20px;text-align:center;}
+.about-hero .eyebrow{background:var(--yellow);color:var(--ink);}
+.about-hero h2{font-size:36px;}
+.story-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center;}
+.story-imgs{border-radius:16px;overflow:hidden;height:420px;box-shadow:var(--shadow-lg);}
+.story-imgs img{width:100%;height:100%;object-fit:cover;border-radius:16px;}
+.story-text p{color:var(--ink-soft);font-size:14.5px;line-height:1.85;margin-bottom:14px;}
+@media (max-width:900px){.story-grid{grid-template-columns:1fr;} .story-imgs{height:320px;}}
+
+.values-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:50px;}
+.value-card{text-align:center;padding:26px 14px;border-radius:16px;background:var(--off);}
+.value-card i{font-size:26px;color:var(--yellow-dark);margin-bottom:10px;display:block;}
+.value-card h4{font-size:14.5px;color:var(--ink);margin-bottom:4px;}
+.value-card p{font-size:12px;color:var(--gray);}
+@media (max-width:800px){.values-grid{grid-template-columns:repeat(2,1fr);}}
+
+/* ===== EXPLORING PLACES ===== */
+.city-tabs{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;}
+.city-tab{padding:11px 24px;border-radius:24px;border:1.5px solid var(--line);background:#fff;font-weight:700;font-size:13.5px;cursor:pointer;color:var(--ink-soft);transition:.2s;}
+.city-tab.active{background:var(--ink);color:var(--yellow);border-color:var(--ink);}
+.cat-tabs{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:26px;}
+.cat-tab{padding:9px 20px;border-radius:20px;border:1.5px solid var(--line);background:#fff;cursor:pointer;font-size:13px;font-weight:600;color:var(--ink-soft);transition:.2s;}
+.cat-tab.active,.cat-tab:hover{background:var(--yellow);color:var(--ink);border-color:var(--yellow);}
+.place-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.place-card{border-radius:18px;overflow:hidden;box-shadow:var(--shadow);transition:.25s;}
+.place-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);}
+.place-card {
+    overflow: hidden;
+    border-radius: 20px;
+}
+
+.place-card img{
+    width:100%;
+    height:450px;
+    display:block;
+    object-fit:cover;
+}
+.place-card-info{padding:16px;}
+.place-card-info h4{font-size:15px;color:var(--ink);margin-bottom:4px;}
+.place-card-info p{font-size:12.5px;color:var(--gray);line-height:1.6;}
+@media (max-width:900px){.place-grid{grid-template-columns:1fr 1fr;}}
+@media (max-width:560px){.place-grid{grid-template-columns:1fr;}}
+.place-city-block{display:none;}
+.place-city-block.active{display:block;}
+
+/* ===== PACKAGES ===== */
+.pkg-card{background:#fff;border-radius:22px;box-shadow:var(--shadow);overflow:hidden;margin-bottom:30px;}
+.pkg-top{display:grid;grid-template-columns:.9fr 1.1fr;}
+.pkg-top img{height:100%;min-height:260px;object-fit:cover;width:100%;}
+.pkg-body{padding:28px 30px;}
+.pkg-tag{display:inline-block;background:var(--yellow-light);color:#7A5B00;font-size:11.5px;font-weight:800;letter-spacing:.5px;padding:4px 12px;border-radius:14px;margin-bottom:10px;text-transform:uppercase;}
+.pkg-body h3{font-size:24px;color:var(--ink);margin-bottom:6px;}
+.pkg-body .route{font-size:13.5px;color:var(--gray);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.pkg-includes{font-size:12.5px;color:var(--ink-soft);background:var(--off);border-radius:10px;padding:10px 14px;margin-bottom:16px;}
+.temple-list{display:grid;grid-template-columns:1fr 1fr;gap:6px 16px;margin-bottom:18px;}
+.temple-list div{font-size:13px;color:var(--ink-soft);display:flex;align-items:center;gap:8px;}
+.temple-list div i{color:var(--yellow-dark);font-size:11px;}
+@media (max-width:560px){.temple-list{grid-template-columns:1fr;}}
+.pkg-vehicle-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:18px;}
+.pkg-veh-opt{border:1.5px solid var(--line);border-radius:12px;padding:12px 16px;flex:1;min-width:150px;}
+.pkg-veh-opt b{display:block;font-size:14px;color:var(--ink);}
+.pkg-veh-opt span{font-size:12px;color:var(--gray);}
+.pkg-veh-opt .amt{color:var(--yellow-dark);font-weight:800;font-size:16px;margin-top:4px;display:block;}
+.btn-book-pkg{background:var(--ink);color:var(--yellow);border:none;padding:13px 30px;border-radius:24px;font-weight:700;font-size:13.5px;cursor:pointer;}
+.btn-book-pkg:hover{background:#000;}
+@media (max-width:800px){.pkg-top{grid-template-columns:1fr;} .pkg-top img{min-height:200px;}}
+
+/* poster-style package cards */
+.poster-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;  max-width: 1000px;
+    margin: 0 auto;
+   }
+.poster-card{background:#fff;border-radius:20px;box-shadow:var(--shadow);overflow:hidden;transition:.25s;display:flex;flex-direction:column;}
+.poster-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);}
+.poster-img-wrap{position:relative;width:100%;aspect-ratio:3/4;overflow:hidden;}
+.poster-img-wrap img{width:100%;height:100%;object-fit:cover;}
+.poster-title-overlay{position:absolute;left:0;right:0;bottom:0;background:linear-gradient(0deg,rgba(0,0,0,.75) 0%,rgba(0,0,0,0) 100%);padding:26px 16px 14px;}
+.poster-title-overlay h4{color:#fff;font-size:16.5px;line-height:1.25;}
+.poster-body{padding:14px 16px 18px;display:flex;flex-direction:column;gap:10px;flex:1;}
+.poster-price{font-size:13px;color:var(--gray);font-weight:600;}
+.poster-price b{color:var(--ink);font-size:15px;}
+.btn-enquiry{margin-top:auto;background:var(--yellow);color:var(--ink);border:none;padding:12px;border-radius:24px;font-weight:800;font-size:13.5px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:.2s;}
+.btn-enquiry:hover{background:var(--yellow-dark);}
+@media (max-width:1000px){.poster-grid{grid-template-columns:repeat(2,1fr);}}
+@media (max-width:520px){.poster-grid{grid-template-columns:1fr;}}
+
+/* ===== GALLERY ===== */
+.gallery-filter{display:flex;gap:10px;margin-bottom:24px;flex-wrap:wrap;}
+.g-filter-btn{padding:10px 20px;border-radius:22px;border:1.5px solid var(--line);background:#fff;font-weight:700;font-size:13px;cursor:pointer;color:var(--ink-soft);transition:.2s;}
+.g-filter-btn.active{background:var(--ink);color:var(--yellow);border-color:var(--ink);}
+.gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+.g-item{border-radius:16px;overflow:hidden;box-shadow:var(--shadow);position:relative;cursor:pointer;transition:.25s;background:#fff;aspect-ratio:1/1;}
+.g-item:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);}
+.g-item img{width:100%;height:100%;display:block;object-fit:cover;}
+@media (max-width:1000px){.gallery-grid{grid-template-columns:repeat(3,1fr);}}
+@media (max-width:700px){.gallery-grid{grid-template-columns:repeat(2,1fr);}}
+@media (max-width:460px){.gallery-grid{grid-template-columns:1fr 1fr;}}
+
+/* Gallery lightbox */
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:6000;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:.25s;padding:20px;}
+.lightbox.active{opacity:1;visibility:visible;}
+.lightbox img{max-width:90vw;max-height:80vh;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.5);}
+.lightbox-cap{color:#fff;text-align:center;margin-top:14px;}
+.lightbox-cap h5{font-size:15px;margin-bottom:2px;}
+.lightbox-cap p{font-size:12.5px;color:#ccc;}
+.lightbox-close{position:absolute;top:20px;right:26px;background:rgba(255,255,255,.12);border:none;width:40px;height:40px;border-radius:50%;color:#fff;font-size:18px;cursor:pointer;}
+
+/* ===== CONTACT ===== */
+.contact-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:40px;}
+.contact-card{background:var(--off);border-radius:18px;padding:22px;display:flex;gap:14px;align-items:center;margin-bottom:14px;}
+.contact-card i{width:44px;height:44px;border-radius:50%;background:var(--yellow);color:var(--ink);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;}
+.contact-card h4{font-size:13.5px;color:var(--gray);margin-bottom:2px;}
+.contact-card p,.contact-card a{font-size:14.5px;color:var(--ink);font-weight:700;}
+.form-box{background:#fff;border-radius:18px;box-shadow:var(--shadow);padding:28px;}
+.form-group{margin-bottom:16px;}
+.form-group label{display:block;font-size:13px;font-weight:600;margin-bottom:7px;color:var(--ink);}
+.form-group input,.form-group textarea{width:100%;padding:13px 15px;border:1.5px solid var(--line);border-radius:12px;font-size:14px;font-family:'Poppins',sans-serif;outline:none;transition:.2s;}
+.form-group input:focus,.form-group textarea:focus{border-color:var(--yellow-dark);}
+.btn-submit{background:var(--yellow);color:var(--ink);border:none;padding:14px 30px;border-radius:24px;font-weight:800;font-size:14px;cursor:pointer;width:100%;transition:.2s;}
+.btn-submit:hover{background:var(--yellow-dark);}
+@media (max-width:900px){.contact-grid{grid-template-columns:1fr;}}
+
+/* ===== REVIEWS ===== */
+.review-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.review-card{background:#fff;border:1.5px solid var(--line);border-radius:18px;padding:24px;}
+.review-head{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
+.review-avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--yellow),var(--yellow-dark));display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--ink);}
+.review-card h5{font-size:14.5px;color:var(--ink);}
+.review-card .stars{color:var(--yellow-dark);font-size:12.5px;}
+.review-card p{font-size:13px;color:var(--gray);line-height:1.7;}
+@media (max-width:900px){.review-grid{grid-template-columns:1fr;}}
+
+/* ===== SETTINGS PAGE WRAP ===== */
+#settings iframe{width:100%;height:calc(100vh - 90px);border:none;display:block;}
+
+/* ===== MODALS ===== */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:4000;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:.25s;padding:16px;}
+.modal-overlay.active{opacity:1;visibility:visible;}
+.modal{background:#fff;border-radius:20px;padding:32px;max-width:460px;width:100%;max-height:90vh;overflow-y:auto;position:relative;transform:scale(.94);transition:.25s;}
+.modal-overlay.active .modal{transform:scale(1);}
+.modal-close{position:absolute;top:16px;right:16px;background:var(--off);border:none;width:34px;height:34px;border-radius:50%;font-size:16px;cursor:pointer;color:var(--ink);}
+.modal h2{font-size:21px;color:var(--ink);margin-bottom:6px;display:flex;align-items:center;gap:10px;}
+.modal .sub{font-size:13px;color:var(--gray);margin-bottom:20px;}
+.otp-inputs{display:flex;gap:8px;justify-content:center;margin:18px 0;}
+.otp-inputs input{width:44px;height:48px;text-align:center;font-size:18px;border:1.5px solid var(--line);border-radius:10px;outline:none;}
+.otp-inputs input:focus{border-color:var(--yellow-dark);}
+.trip-summary{background:var(--off);border-radius:12px;padding:14px 16px;margin-bottom:16px;font-size:13px;color:var(--ink-soft);}
+.trip-summary b{color:var(--ink);}
+.book-btn-row{display:flex;gap:10px;margin-top:6px;}
+.btn-wa{flex:1;background:#25D366;color:#fff;border:none;padding:13px;border-radius:24px;font-weight:700;font-size:13.5px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;}
+.btn-mail{flex:1;background:var(--ink);color:var(--yellow);border:none;padding:13px;border-radius:24px;font-weight:700;font-size:13.5px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;}
+
+.toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--ink);color:#fff;padding:14px 28px;border-radius:12px;font-size:13.5px;z-index:5000;opacity:0;transition:.4s;box-shadow:var(--shadow-lg);}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1;}
+.toast.success{background:var(--success);}
+.toast.error{background:var(--danger);}
+
+/* Place Preview Modal (image + enquiry) */
+.place-preview-modal{max-width:520px;padding:0;overflow:hidden;max-height:88vh;display:flex;flex-direction:column;}
+.place-preview-modal .modal-close{background:rgba(0,0,0,.4);color:#fff;top:14px;right:14px;z-index:2;}
+.place-preview-scroll{overflow-y:auto;flex:1 1 auto;min-height:0;}
+.place-preview-img{width:100%;max-height:60vh;object-fit:contain;background:#fff;display:block;}
+.place-preview-body{padding:18px 26px 22px;flex-shrink:0;border-top:1px solid var(--line);background:#fff;}
+.place-preview-body h3{font-size:19px;color:var(--ink);margin-bottom:4px;}
+.place-preview-body p{font-size:13px;color:var(--gray);margin-bottom:14px;line-height:1.5;}
+
+/* Hero transport strip (Railway & Airport 24/7 box) */
+.hero-transport-box{display:flex;align-items:center;gap:14px;flex-wrap:wrap;background:rgba(255,199,44,.1);border:1px solid rgba(255,199,44,.3);border-radius:16px;padding:12px 16px;margin-bottom:16px;}
+.hero-transport-box .htb-icon{width:38px;height:38px;border-radius:50%;background:var(--yellow);color:var(--ink);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;}
+.hero-transport-box .htb-text{font-size:12.5px;color:#eee;line-height:1.4;}
+.hero-transport-box .htb-text b{color:var(--yellow);display:block;font-size:13px;}
+.hero-transport-box .htb-actions{display:flex;gap:8px;margin-left:auto;}
+.htb-btn{display:flex;align-items:center;gap:6px;border:none;padding:8px 14px;border-radius:20px;font-weight:700;font-size:12px;cursor:pointer;white-space:nowrap;}
+.htb-btn.wa{background:#25D366;color:#fff;}
+.htb-btn.call{background:var(--yellow);color:var(--ink);}
+@media (max-width:520px){.hero-transport-box{flex-direction:column;align-items:flex-start;} .hero-transport-box .htb-actions{margin-left:0;width:100%;} .htb-btn{flex:1;justify-content:center;}}
+
+/* WhatsApp floating btn */
+.fab-wa{position:fixed;bottom:26px;right:26px;width:58px;height:58px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;color:#fff;font-size:26px;box-shadow:var(--shadow-lg);z-index:1500;animation:float 3s ease-in-out infinite;}
+
+@media (max-width:768px){
+  .nav-links{display:none;}
+  .mobile-menu-btn{display:block;}
+  .veh-grid{grid-template-columns:1fr 1fr;}
+  .place-grid{grid-template-columns:1fr;}
+  .stats-grid{grid-template-columns:1fr 1fr;}
+  .sec-title{font-size:26px;}
+  .hero h2{font-size:28px;}
+}
+
+
+
+.pkg-bullet-list{
+  list-style:none;
+  margin:16px 0 24px;
+  padding:0;
+}
+.pkg-bullet-list li{
+  position:relative;
+  padding-left:22px;
+  margin-bottom:10px;
+  font-size:15px;
+  color:var(--ink-soft);
+  line-height:1.5;
+}
+.pkg-bullet-list li::before{
+  content:"";
+  position:absolute;
+  left:4px;
+  top:8px;
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:var(--yellow-dark);
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div><i class="fas fa-phone"></i> <a href="tel:9789747965">97897 47965</a> &nbsp;|&nbsp; <i class="fas fa-envelope"></i> <a href="mailto:shankarsinex@gmail.com">shankarsinex@gmail.com</a></div>
+  <div><span class="exp-pill"><i class="fas fa-award"></i> 35 Years Driving Experience</span></div>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="nav-inner">
+    <div class="brand" onclick="showSection('home')">
+      <div class="brand-badge"><img src="logo.png" alt="Divya Travels Logo"></div>
+      <div><h1>Divya Travels</h1><span></span></div>
+    </div>
+    <div class="nav-links" id="navLinks">
+      <a href="#" onclick="showSection('home',this)" class="active">Home</a>
+      <a href="#" onclick="showSection('about',this)">About</a>
+      <a href="#" onclick="showSection('explore',this)">Exploring Places</a>
+      <a href="#" onclick="showSection('packages',this)">Packages</a>
+      <a href="#" onclick="showSection('gallery',this)">Gallery</a>
+      <a href="#" onclick="showSection('contact',this)">Contact</a>
+      <a href="#" onclick="showSection('reviews',this)">Reviews</a>
+    </div>
+    <div class="nav-actions">
+      <button class="icon-btn" id="notifBtn" onclick="toggleNotif()" title="Notifications">
+        <i class="fas fa-bell"></i><span class="badge-dot" id="notifBadge">3</span>
+      </button>
+      <button class="icon-btn" onclick="showSection('settings')" title="Account &amp; Settings"><i class="fas fa-user-cog"></i></button>
+      <button class="btn-login" id="loginBtn" onclick="showModal('login')">Login</button>
+      <button class="mobile-menu-btn" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></button>
+    </div>
+  </div>
+</nav>
+
+<div class="notif-panel" id="notifPanel">
+  <div class="notif-head">Notifications</div>
+  <div class="notif-row"><b>🎉 Welcome to Divya Travels!</b><span>Book your first temple tour and get priority pickup.</span></div>
+  <div class="notif-row"><b>🛕 New Package Added</b><span>Kancheepuram Temple Tour — 10 temples in one day.</span></div>
+  <div class="notif-row"><b>📞 24/7 Support</b><span>Call or WhatsApp 97897 47965 anytime for bookings.</span></div>
+</div>
+
+<!-- MOBILE NAV -->
+<div class="mobile-overlay" id="mobileOverlay" onclick="toggleMobileMenu()"></div>
+<div class="mobile-nav" id="mobileNav">
+  <a href="#" onclick="showSection('home');toggleMobileMenu()"><i class="fas fa-home"></i> Home</a>
+  <a href="#" onclick="showSection('about');toggleMobileMenu()"><i class="fas fa-info-circle"></i> About</a>
+  <a href="#" onclick="showSection('explore');toggleMobileMenu()"><i class="fas fa-map-marked-alt"></i> Exploring Places</a>
+  <a href="#" onclick="showSection('packages');toggleMobileMenu()"><i class="fas fa-box"></i> Packages</a>
+  <a href="#" onclick="showSection('gallery');toggleMobileMenu()"><i class="fas fa-images"></i> Gallery</a>
+  <a href="#" onclick="showSection('contact');toggleMobileMenu()"><i class="fas fa-phone"></i> Contact</a>
+  <a href="#" onclick="showSection('reviews');toggleMobileMenu()"><i class="fas fa-star"></i> Reviews</a>
+  <a href="#" onclick="showSection('settings');toggleMobileMenu()"><i class="fas fa-user-cog"></i> Settings</a>
+</div>
+
+<!-- ================= HOME ================= -->
+<div id="home" class="page-section active">
+  <section class="hero">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-transport-box">
+          <div class="htb-icon"><i class="fas fa-train"></i></div>
+          <div class="htb-text"><b>Railway &amp; Airport Pickup / Drop</b>24/7 Available across Chennai</div>
+          <div class="htb-actions">
+            <a class="htb-btn wa" href="https://wa.me/919789747965?text=Hi%20Divya%20Travels%2C%20I%27d%20like%20to%20book%20a%20Railway%2FAirport%20pickup%20or%20drop." target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+            <a class="htb-btn call" href="tel:9789747965"><i class="fas fa-phone"></i> Call</a>
+          </div>
+        </div>
+        <div class="hero-badges" style="margin-bottom:16px;">
+          <div class="hero-badge"><i class="fas fa-star"></i> 4.9 Rated Service</div>
+          <div class="hero-badge"><i class="fas fa-shield-alt"></i> Safe &amp; Verified Driver</div>
+        </div>
+        <h2>Where are you<br><span>Going?</span></h2>
+        <p>Book reliable cabs across Chennai and custom temple-tour packages — driven personally with 35 years of experience on the road.</p>
+      </div>
+      <div class="hero-img">
+        <img src="image.png" alt="Divya Travels cab">
+      </div>
+    </div>
+  </section>
+
+  <!-- SEARCH CARD -->
+  <div class="wrap">
+    <div class="search-card fade">
+      <div class="search-title"><i class="fas fa-route"></i> Plan your trip</div>
+      <div class="search-row">
+        <div class="search-field"><i class="fas fa-circle f-ico" style="font-size:9px;color:#1F9D55;"></i><input type="text" id="pickupInput" placeholder="Your Location (Pickup)"></div>
+        <div class="search-field"><i class="fas fa-map-marker-alt f-ico"></i><input type="text" id="destInput" placeholder="Destination"></div>
+        <button class="btn-search" onclick="openBookingFromSearch()"><i class="fas fa-search"></i> Search Cabs</button>
+      </div>
+      <p class="search-note"><i class="fas fa-info-circle"></i> Booking requests are sent directly to our driver on WhatsApp / Email — no app download needed.</p>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-strip">
+    <div class="stats-grid">
+      <div class="stat-box"><i class="fas fa-award"></i><h3>35+</h3><p>Years Driving Experience</p></div>
+      <div class="stat-box"><i class="fas fa-route"></i><h3>10,000+</h3><p>Trips Completed</p></div>
+      <div class="stat-box"><i class="fas fa-gopuram"></i><h3>50+</h3><p>Temple Routes Covered</p></div>
+      <div class="stat-box"><i class="fas fa-clock"></i><h3>24/7</h3><p>Available for Booking</p></div>
+    </div>
+  </div>
+
+  <!-- VEHICLES -->
+  <section class="section-pad wrap">
+    <div class="eyebrow">Choose your ride</div>
+    <h2 class="sec-title">Vehicles Available</h2>
+    <p class="sec-sub" style="margin-bottom:30px;">Pick the right vehicle for your trip — from a quick city ride to a full temple tour group.</p>
+               <ul class="pkg-bullet-list"></ul>
+               <li>Out Of city Round Trip For Day 250KM/Tempo Traveller 300KM</li>
+               <li>Driver Bata-600</li>
+               <li>Note: Vehicles From Other State Permit Charges Extra</li>
+               </ul><br>
+    <div class="veh-grid">
+      <div class="veh-card" onclick="openBooking('Hatchback (4 Seater)','From ₹13/km')">
+        <div class="veh-img-wrap"><img src="hatchback.jpg" alt="Hatchback" class="veh-img" loading="lazy"></div>
+        <h4>Hatchback</h4>
+        <div class="seats"><i class="fas fa-user"></i> 4 Seater</div>
+        <div class="veh-price"> <span>Coverage for KM 13rupees</span></div>
+        <button class="btn-veh-book">Book Now</button>
+      </div>
+      <div class="veh-card" onclick="openBooking('Sedan (4 Seater)','From ₹15/km')">
+        <div class="veh-img-wrap"><img src="car2.jpg" alt="Sedan" class="veh-img" loading="lazy"></div>
+        <h4>Sedan</h4>
+        <div class="seats"><i class="fas fa-user"></i> 4 Seater</div>
+        <div class="veh-price"> <span>Coverage for KM 15rupees</span></div>
+        <button class="btn-veh-book">Book Now</button>
+      </div>
+      <div class="veh-card" onclick="openBooking('SUV (6-7 Seater)','From ₹18/km')">
+        <div class="veh-img-wrap"><img src="car3.jpg" alt="SUV" class="veh-img" loading="lazy"></div>
+        <h4>SUV</h4>
+        <div class="seats"><i class="fas fa-user"></i> 6-7 Seater</div>
+        <div class="veh-price"> <span>Coverage for KM 18rupees</span></div>
+        <button class="btn-veh-book">Book Now</button>
+      </div>
+      <div class="veh-card" onclick="openBooking('Tempo Traveller (12 Seater)','On request')">
+        <div class="veh-img-wrap"><img src="car4.jpg" alt="Tempo Traveller" class="veh-img" loading="lazy"></div>
+        <h4>Tempo Traveller</h4>
+        <div class="seats"><i class="fas fa-user"></i> 12 Seater</div>
+        <div class="veh-price" style="font-size:15px;"> <span>Coverage for KM 24rupees</span></div>
+        <button class="btn-veh-book">Book Now</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAP -->
+  <section class="section-pad wrap">
+    <div class="map-flex">
+      <div>
+        <div class="eyebrow">Where we operate</div>
+        <h2 class="sec-title">Live &amp; Available in Chennai</h2>
+        <p class="sec-sub" style="margin-bottom:22px;">Pickup anywhere in Chennai city and nearby districts — Kancheepuram, Mamallapuram and more.</p>
+        <div class="map-point"><i class="fas fa-location-dot"></i><div><b>Location</b><p style="font-size:12.5px;color:var(--gray);">Injambakkam, Chennai 600 115, Tamil Nadu</p></div></div>
+        <div class="map-point"><i class="fas fa-route"></i><div><b>Service Area</b><p style="font-size:12.5px;color:var(--gray);">Chennai City, Kancheepuram, Mamallapuram &amp; nearby temple towns</p></div></div>
+        <div class="map-point"><i class="fas fa-phone"></i><div><b>Instant Booking</b><p style="font-size:12.5px;color:var(--gray);">Call or WhatsApp 97897 47965</p></div></div>
+      </div>
+      <div class="map-card">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15550.857123456789!2d80.2436!3d12.9141!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTLCsDU0JzUwLjgiTiA4MMKwMTQnMzcuMCJF!5e0!3m2!1sen!2sin!4v1234567890" loading="lazy"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED PACKAGES -->
+  <section class="section-pad wrap" style="background:var(--off);border-radius:30px;">
+    <div class="eyebrow">Most booked</div>
+    <h2 class="sec-title">Popular Temple Tour Packages</h2>
+    <p class="sec-sub" style="margin-bottom:30px;">Full-day guided temple trips with car parking, toll gate &amp; all entries included.</p>
+    <div class="pkg-mini-grid">
+       <div class="pkg-mini" onclick="openPlacePreview('Chennai City Tour','Beaches, temples &amp; landmarks','pg1.png')">
+        <img src="chennai.jpg" alt="Chennai city">
+        <div class="pkg-mini-info"><h4>Chennai City Tour</h4><p>Beaches, temples &amp; landmarks</p></div>
+      </div>
+      <div class="pkg-mini" onclick="openPlacePreview('Mamallapuram Day Trip','Shore Temple &amp; more · Full day','pg2.png')">
+        <img src="mamalla.jpg" alt="Mamallapuram">
+        <div class="pkg-mini-info"><h4>Mamallapuram Day Trip</h4><p>Shore Temple &amp; more · Full day</p></div>
+      </div>
+      <div class="pkg-mini" onclick="openPlacePreview('Kancheepuram Trip','Visiting Temples &amp; more · Full day','pg3.png')">
+        <img src="kanchee.jpg" alt="Kancheepuram">
+        <div class="pkg-mini-info"><h4>Kancheepuram  Trip</h4><p>Visiting Temples &amp; more · Full day</p></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ================= ABOUT ================= -->
+<div id="about" class="page-section">
+  <section class="about-hero">
+    <div class="eyebrow">About us</div>
+    <h2>Divya Travels</h2>
+    <p style="color:#ccc;max-width:520px;margin:10px auto 0;font-size:14.5px;">35 years on the road, one driver you can always trust.</p>
+  </section>
+
+  <section class="section-pad wrap">
+    <div class="story-grid">
+      <div class="story-imgs">
+        <img src="abt.png" alt="Divya Travels - Our Story">
+      </div>
+      <div class="story-text">
+        <div class="eyebrow">Our story</div>
+        <h2 class="sec-title" style="margin-bottom:16px;">35 Years Behind the Wheel</h2>
+        <p>Divya Travels began with one driver, one car, and a simple promise — get every passenger to their destination safely, on time, every time. Over 35 years, that promise never changed, even as the roads, the cars, and the city around us did.</p>
+        <p>What started as everyday city rides slowly grew into full-day temple tour packages, taking families to Kancheepuram, Mamallapuram, and beyond — planned personally, driven personally, and priced fairly.</p>
+        <p>Today, Divya Travels is trusted by thousands of families across Chennai for both quick city cabs and long temple pilgrimages, all backed by decades of real driving experience and genuine care for every passenger.</p>
+      </div>
+    </div>
+
+    <div class="values-grid">
+      <div class="value-card"><i class="fas fa-shield-alt"></i><h4>Safety First</h4><p>Careful, defensive driving on every trip</p></div>
+      <div class="value-card"><i class="fas fa-clock"></i><h4>Always On Time</h4><p>Punctual pickups &amp; drop-offs</p></div>
+      <div class="value-card"><i class="fas fa-couch"></i><h4>Comfortable Rides</h4><p>Clean, well-maintained vehicles</p></div>
+      <div class="value-card"><i class="fas fa-handshake"></i><h4>Honest Pricing</h4><p>No hidden charges, ever</p></div>
+    </div>
+  </section>
+</div>
+
+<!-- ================= EXPLORING PLACES ================= -->
+<div id="explore" class="page-section">
+  <section class="section-pad wrap">
+    <div class="eyebrow">Explore with us</div>
+    <h2 class="sec-title">Exploring Places</h2>
+    <p class="sec-sub" style="margin-bottom:26px;">Popular destinations we take our passengers to — pick a city, then filter by category.</p>
+
+    <div class="city-tabs">
+      <button class="city-tab active" onclick="showCity('chennai',this)"><i class="fas fa-city"></i> Chennai</button>
+      <button class="city-tab" onclick="showCity('mamallapuram',this)"><i class="fas fa-monument"></i> Mamallapuram</button>
+      <button class="city-tab" onclick="showCity('kancheepuram',this)"><i class="fas fa-place-of-worship"></i> Kancheepuram</button>
+    </div>
+
+    <!-- Category filter buttons -->
+    <div class="cat-tabs">
+      <button class="cat-tab active" data-cat="all" onclick="filterCat('all',this)">All</button>
+      <button class="cat-tab" data-cat="temple" onclick="filterCat('temple',this)">Temples</button>
+      <button class="cat-tab" data-cat="site" onclick="filterCat('site',this)">Site Scenes</button>
+      <button class="cat-tab" data-cat="library" onclick="filterCat('library',this)">Library</button>
+      <button class="cat-tab" data-cat="mall" onclick="filterCat('mall',this)">Mall</button>
+      <button class="cat-tab" data-cat="church" onclick="filterCat('church',this)">Church</button>
+    </div>
+
+    <!-- ===================== ALL PLACES (combined across cities + station/airport) ===================== -->
+    <div class="place-city-block" id="city-allcombined"></div>
+
+    <!-- ===================== CHENNAI ===================== -->
+    <div class="place-city-block" id="city-chennai">
+      <div class="place-grid">
+
+        <!-- Temples -->
+        <div class="place-card" data-cat="temple"><img src="image1.jpg" alt="Kapaleeswarar Temple"><div class="place-card-info"><h4>Arulmigu Kapaleeswarar Temple</h4><p>Iconic Dravidian-style temple in the heart of Mylapore.</p></div></div>
+        <div class="place-card" data-cat="temple"><img src="image2.jpg" alt="Parthasarathy Swamy Temple"><div class="place-card-info"><h4>Arulmigu Parthasarathy Swamy Temple</h4><p>One of the oldest temples in Chennai, located in Triplicane.</p></div></div>
+        <div class="place-card" data-cat="temple"><img src="image3.jpg" alt="Vadapalani Andavar Temple"><div class="place-card-info"><h4>Arulmigu Vadapalani Andavar Temple</h4><p>Popular Murugan temple known for its grand gopuram.</p></div></div>
+        <div class="place-card" data-cat="temple"><img src="image4.jpg" alt="Ashtalakshmi Temple"><div class="place-card-info"><h4>Ashtalakshmi Temple</h4><p>Coastal temple in Besant Nagar dedicated to eight forms of Goddess Lakshmi.</p></div></div>
+        <div class="place-card" data-cat="temple"><img src="image5.jpg" alt="Marundeeswarar Temple"><div class="place-card-info"><h4>Marundeeswarar Temple</h4><p>Ancient Shiva temple in Thiruvanmiyur known for medicinal healing legends.</p></div></div>
+        <div class="place-card" data-cat="temple"><img src="image6.jpg" alt="ISKCON Temple"><div class="place-card-info"><h4>ISKCON Temple</h4><p>Vibrant Krishna temple in Akkarai known for its evening aarti.</p></div></div>
+        <div class="place-card" data-cat="temple"><img src="image7.jpg" alt="Matsya Narayana Temple"><div class="place-card-info"><h4>Matsya Narayana Temple</h4><p>Serene temple in Uthandi, dedicated to the fish avatar of Vishnu.</p></div></div>
+
+        <!-- Site Scenes -->
+        <div class="place-card" data-cat="site"><img src="image8.jpg" alt="Victoria Public Hall"><div class="place-card-info"><h4>Victoria Public Hall</h4><p>Heritage building in Central Chennai, an architectural landmark.</p></div></div>
+        <div class="place-card" data-cat="site"><img src="image9.jpg" alt="Chennai Rail Museum"><div class="place-card-info"><h4>Chennai Rail Museum</h4><p>Showcases vintage locomotives and railway history.</p></div></div>
+        <div class="place-card" data-cat="site"><img src="image10.jpg" alt="Egmore Museum"><div class="place-card-info"><h4>Government Museum, Egmore</h4><p>One of the oldest museums in India with rich archaeological exhibits.</p></div></div>
+        <div class="place-card" data-cat="site"><img src="image11.jpg" alt="Kalaignar Centenary Park"><div class="place-card-info"><h4>Kalaignar Centenary Park</h4><p>Popular amusement park with rides and green open spaces.</p></div></div>
+        <div class="place-card" data-cat="site"><img src="image12.jpg" alt="Marina Beach"><div class="place-card-info"><h4>Marina Beach</h4><p>One of the longest urban beaches in the world — a Chennai must-visit.</p></div></div>
+        <div class="place-card" data-cat="site"><img src="image13.jpg" alt="Vivekananda House"><div class="place-card-info"><h4>Vivekananda House</h4><p>Heritage building overlooking the Marina, once home to Swami Vivekananda.</p></div></div>
+        <div class="place-card" data-cat="site"><img src="image14.jpg" alt="Marina Lighthouse"><div class="place-card-info"><h4>Marina Lighthouse</h4><p>Offers a panoramic view of the coastline from the top.</p></div></div>
+        <div class="place-card" data-cat="site"><img src="image15.jpg" alt="Eliot's Beach"><div class="place-card-info"><h4>Eliot's Beach</h4><p>Calm and clean beach in Besant Nagar, great for evening walks.</p></div></div>
+        <div class="place-card" data-cat="site"><img src="image16.jpg" alt="Guindy Children's Park"><div class="place-card-info"><h4>Guindy Children's Park</h4><p>Family-friendly park within Guindy National Park premises.</p></div></div>
+
+        <!-- Library -->
+        <div class="place-card" data-cat="library"><img src="image17.jpg" alt="Anna Centenary Library"><div class="place-card-info"><h4>Anna Centenary Library</h4><p>One of the largest libraries in Asia, with a massive book collection.</p></div></div>
+        <div class="place-card" data-cat="library"><img src="image18.jpg" alt="Connemara Public Library"><div class="place-card-info"><h4>Connemara Public Library</h4><p>Historic public library and one of India's four National Depository libraries.</p></div></div>
+        <div class="place-card" data-cat="library"><img src="image19.jpg" alt="Periyar Nagar Public Library"><div class="place-card-info"><h4>Periyar Nagar Public Library</h4><p>Community library popular among students and researchers.</p></div></div>
+
+        <!-- Mall -->
+        <div class="place-card" data-cat="mall"><img src="image20.jpg" alt="Marina Mall"><div class="place-card-info"><h4>Marina Mall</h4><p>Shopping and entertainment complex near the coast.</p></div></div>
+        <div class="place-card" data-cat="mall"><img src="image21.jpg" alt="Express Avenue Mall"><div class="place-card-info"><h4>Express Avenue Mall</h4><p>One of Chennai's most popular malls with shopping and dining.</p></div></div>
+        <div class="place-card" data-cat="mall"><img src="image22.jpg" alt="Phoenix Mall"><div class="place-card-info"><h4>Phoenix MarketCity</h4><p>Large mall with a wide range of brands, food courts, and cinema.</p></div></div>
+
+        <!-- Church -->
+        <div class="place-card" data-cat="church"><img src="image23.jpg" alt="Velankanni Church"><div class="place-card-info"><h4>Velankanni Church</h4><p>Beautiful shrine dedicated to Our Lady of Good Health.</p></div></div>
+        <div class="place-card" data-cat="church"><img src="image24.jpg" alt="Santhome Cathedral Basilica"><div class="place-card-info"><h4>San Thome Cathedral Basilica</h4><p>A stunning basilica built over the tomb of St. Thomas the Apostle.</p></div></div>
+        <div class="place-card" data-cat="church"><img src="image25.jpeg" alt="Shrine of Our Lady of Health"><div class="place-card-info"><h4>Shrine of Our Lady of Health, Little Mount</h4><p>Historic shrine associated with St. Thomas the Apostle.</p></div></div>
+
+      </div>
+    </div>
+
+    <!-- ===================== MAMALLAPURAM ===================== -->
+    <div class="place-city-block" id="city-mamallapuram">
+      <div class="place-grid">
+
+        <div class="place-card" data-cat="site"><img src="image26.jpg" alt="VGP Golden Beach"><div class="place-card-info"><h4>VGP Golden Beach</h4><p>Popular beach resort with rides, greenery, and a private shoreline.</p></div></div>
+        <div class="place-card" data-cat="site"><img src="image27.jpg" alt="VGP Marine Kingdom"><div class="place-card-info"><h4>VGP Marine Kingdom</h4><p>Aquarium and marine-themed park along the ECR.</p></div></div>
+        <div class="place-card" data-cat="site"><img src="image28.jpg" alt="VGP Snow Kingdom"><div class="place-card-info"><h4>VGP Snow Kingdom</h4><p>India's snow-themed indoor amusement park.</p></div></div>
+        <div class="place-card" data-cat="site"><img src="image29.jpg" alt="Rooftop Restaurant Bay of Bengal"><div class="place-card-info"><h4>Rooftop Restaurant</h4><p>Gaze at the Bay of Bengal while enjoying a meal on a majestic rooftop.</p></div></div>
+        <div class="place-card" data-cat="site"><img src="image30.jpg" alt="DakshinaChitra Museum"><div class="place-card-info"><h4>DakshinaChitra Museum</h4><p>Living-history museum showcasing South Indian heritage and crafts.</p></div></div>
+        <div class="place-card" data-cat="site"><img src="image31.jpg" alt="MGM Dizzee World"><div class="place-card-info"><h4>MGM Dizzee World</h4><p>Popular amusement and water park on the ECR.</p></div></div>
+        <div class="place-card" data-cat="site"><img src="image32.jpeg" alt="Crocodile Park"><div class="place-card-info"><h4>Crocodile Park</h4><p>Home to thousands of crocodiles and reptiles, near Mamallapuram.</p></div></div>
+        <div class="place-card" data-cat="temple"><img src="image33.jpg" alt="Shore Temple"><div class="place-card-info"><h4>Shore Temple</h4><p>A UNESCO World Heritage 8th-century temple facing the Bay of Bengal.</p></div></div>
+        <div class="place-card" data-cat="site"><img src="image34.jpg" alt="Five Rathas"><div class="place-card-info"><h4>Five Rathas (Pancha Rathas)</h4><p>Five monolithic rock-cut temples, an architectural marvel.</p></div></div>
+        <div class="place-card" data-cat="site"><img src="image35.jpg" alt="Krishna's Butter Ball"><div class="place-card-info"><h4>Krishna's Butter Ball</h4><p>A giant balancing boulder that defies gravity.</p></div></div>
+        <div class="place-card" data-cat="site"><img src="image36.jpg" alt="Arjuna's Penance"><div class="place-card-info"><h4>Descent of the Ganga / Arjuna's Penance</h4><p>A massive open-air rock relief depicting Indian mythology.</p></div></div>
+        <div class="place-card" data-cat="site"><img src="image37.jpg" alt="Mamallapuram Lighthouse"><div class="place-card-info"><h4>Lighthouse</h4><p>Offers a scenic view over the Mamallapuram coastline.</p></div></div>
+        <div class="place-card" data-cat="site"><img src="image38.jpg" alt="Mamallapuram Beach"><div class="place-card-info"><h4>Mamallapuram Beach</h4><p>A peaceful coastline perfect to end the day trip.</p></div></div>
+        <div class="place-card" data-cat="site"><img src="image39.jpg" alt="Tiger Cave"><div class="place-card-info"><h4>Tiger Cave</h4><p>A rock-cut shrine with carved tiger heads near the coast.</p></div></div>
+        <div class="place-card" data-cat="temple"><img src="image40.jpg" alt="Sthala Sayana Perumal Temple"><div class="place-card-info"><h4>Arulmigu Sri Sthala Sayana Perumal Temple</h4><p>Ancient Vishnu temple located in Mamallapuram.</p></div></div>
+
+      </div>
+    </div>
+
+    <!-- ===================== KANCHEEPURAM (10 Temples) ===================== -->
+    <div class="place-city-block" id="city-kancheepuram">
+      <div class="place-grid">
+
+        <div class="place-card" data-cat="temple"><img src="image41.jpg" alt="Kamakshi Amman Temple"><div class="place-card-info"><h4>Kamakshi Amman Temple</h4><p>One of the Shakti Peethas, dedicated to Goddess Kamakshi.</p></div></div>
+        <div class="place-card" data-cat="temple"><img src="image42.jpg" alt="Ekambareswarar Temple"><div class="place-card-info"><h4>Ekambareswarar Temple</h4><p>A vast Shiva temple, one of the Pancha Bhoota Sthalams (earth element).</p></div></div>
+        <div class="place-card" data-cat="temple"><img src="image43.jpg" alt="Varadharaja Perumal Temple"><div class="place-card-info"><h4>Varadharaja Perumal Temple</h4><p>Grand Vishnu temple known for its 100-pillar hall and intricate carvings.</p></div></div>
+        <div class="place-card" data-cat="temple"><img src="image44.jpg" alt="Kailasanathar Temple"><div class="place-card-info"><h4>Kailasanathar Temple</h4><p>Oldest structural temple in Kancheepuram, built by the Pallavas.</p></div></div>
+        <div class="place-card" data-cat="temple"><img src="image45.jpg" alt="Ulagalanda Perumal Temple"><div class="place-card-info"><h4>Ulagalanda Perumal Temple</h4><p>Temple dedicated to Lord Vishnu's Trivikrama avatar.</p></div></div>
+        <div class="place-card" data-cat="temple"><img src="image46.jpg" alt="Kumarakottam Murugan Temple"><div class="place-card-info"><h4>Kumarakottam Murugan Temple</h4><p>Colourful temple dedicated to Lord Murugan.</p></div></div>
+        <div class="place-card" data-cat="temple"><img src="image47.jpg" alt="Vaikunta Perumal Temple"><div class="place-card-info"><h4>Vaikunta Perumal Temple</h4><p>Known for its unique triple-sanctum architecture.</p></div></div>
+        <div class="place-card" data-cat="temple"><img src="image48.jpg" alt="Chitragupta Swamy Temple"><div class="place-card-info"><h4>Chitragupta Swamy Temple</h4><p>One of the rare temples dedicated to Lord Chitragupta.</p></div></div>
+        <div class="place-card" data-cat="temple"><img src="image49.jpg" alt="Pandava Thoothar Perumal Temple"><div class="place-card-info"><h4>Pandava Thoothar Perumal Temple</h4><p>Temple linked to the Mahabharata legend of Krishna as a messenger.</p></div></div>
+        <div class="place-card" data-cat="temple"><img src="image50.jpg" alt="Kachapeshwarar Temple"><div class="place-card-info"><h4>Kachapeshwarar Temple</h4><p>Shiva temple associated with the tortoise (Kachapa) legend of Vishnu.</p></div></div>
+
+      </div>
+    </div>
+
+  </section>
+</div>
+
+<!-- ================= PACKAGES ================= -->
+<div id="packages" class="page-section">
+  <section class="section-pad wrap">
+    <div class="eyebrow">Temple tour packages</div>
+    <h2 class="sec-title">Packages</h2>
+    <p class="sec-sub" style="margin-bottom:30px;">Pick a package below and send us an enquiry — we'll confirm pricing and timing over WhatsApp or Email.</p>
+
+    <div class="poster-grid">
+      <div class="poster-card">
+        <div class="poster-img-wrap">
+         <img src="gallery_photos/gallery/poster1.jpeg" alt="package 1">
+          <div class="poster-title-overlay"><h4></h4></div>
+        </div>
+        <div class="poster-body">
+          <div class="poster-price">Price <b>On Request</b></div>
+          <button class="btn-enquiry" onclick="openBooking('Thank you for your enquiry. Our team will contact you shortly with the package details.')"><i class="fas fa-calendar-check"></i> Enquiry</button>
+        </div>
+      </div>
+
+      <div class="poster-card">
+        <div class="poster-img-wrap">
+          <img src="gallery_photos/gallery/poster2.jpeg" alt="package 2">
+          <div class="poster-title-overlay"><h4></h4></div>
+        </div>
+        <div class="poster-body">
+          <div class="poster-price">Price <b>On Request</b></div>
+          <button class="btn-enquiry" onclick="openBooking('Thank you for your enquiry. Our team will contact you shortly with the package details.')"><i class="fas fa-calendar-check"></i> Enquiry</button>
+        </div>
+      </div>
+
+      <div class="poster-card">
+        <div class="poster-img-wrap">
+          <img src="gallery_photos/gallery/poster3.jpeg" alt="package 3">
+          <div class="poster-title-overlay"><h4></h4></div>
+        </div>
+        <div class="poster-body">
+          <div class="poster-price">Price <b>On Request</b></div>
+          <button class="btn-enquiry" onclick="openBooking('Thank you for your enquiry. Our team will contact you shortly with the package details.')"><i class="fas fa-calendar-check"></i> Enquiry</button>
+        </div>
+      </div>
+
+      <div class="poster-card">
+        <div class="poster-img-wrap">
+          <img src="gallery_photos/gallery/poster4.jpeg" alt="package 4">
+          <div class="poster-title-overlay"><h4></h4></div>
+        </div>
+        <div class="poster-body">
+          <div class="poster-price">Price <b>On Request</b></div>
+          <button class="btn-enquiry" onclick="openBooking('Thank you for your enquiry. Our team will contact you shortly with the package details.')"><i class="fas fa-calendar-check"></i> Enquiry</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ================= GALLERY ================= -->
+<div id="gallery" class="page-section">
+  <section class="section-pad wrap">
+    <div class="eyebrow">Our journey in pictures</div>
+    <h2 class="sec-title">Gallery</h2>
+    <p class="sec-sub" style="margin-bottom:30px;">A look at our cabs and trips on the road — real cars, real customers, real journeys across Chennai and beyond.</p>
+    <div class="gallery-grid" id="galleryGrid"></div>
+  </section>
+</div>
+
+<!-- ================= CONTACT ================= -->
+<div id="contact" class="page-section">
+  <section class="section-pad wrap">
+    <div class="eyebrow">Get in touch</div>
+    <h2 class="sec-title">Contact Us</h2>
+    <p class="sec-sub" style="margin-bottom:30px;">Reach out for bookings, custom packages, or any questions.</p>
+
+    <div class="contact-grid">
+      <div>
+        <div class="contact-card"><i class="fas fa-phone"></i><div><h4>Call / WhatsApp</h4><a href="tel:9789747965">97897 47965</a></div></div>
+        <div class="contact-card"><i class="fas fa-envelope"></i><div><h4>Email</h4><a href="mailto:shankarsinex@gmail.com">shankarsinex@gmail.com</a></div></div>
+        <div class="contact-card"><i class="fas fa-map-marker-alt"></i><div><h4> Location</h4><p>Injambakkam, Chennai 600 115</p></div></div>
+        <div class="map-card" style="margin-top:20px;">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15550.857123456789!2d80.2436!3d12.9141!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTLCsDU0JzUwLjgiTiA4MMKwMTQnMzcuMCJF!5e0!3m2!1sen!2sin!4v1234567890" loading="lazy" style="height:260px;"></iframe>
+        </div>
+      </div>
+      <div class="form-box">
+        <h3 style="font-size:18px;color:var(--ink);margin-bottom:18px;">Send us a Message</h3>
+        <form id="contactForm" onsubmit="submitContactForm(event)">
+          <div class="form-group"><label>Your Name</label><input type="text" id="cName" required></div>
+          <div class="form-group"><label>Phone Number</label><input type="tel" id="cPhone" required></div>
+          <div class="form-group"><label>Message</label><textarea id="cMsg" rows="4" required placeholder="Tell us about your trip..."></textarea></div>
+          <button type="submit" class="btn-submit"><i class="fab fa-whatsapp"></i> Send via WhatsApp</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ================= REVIEWS ================= -->
+<div id="reviews" class="page-section">
+  <section class="section-pad wrap">
+    <div class="eyebrow">Testimonials</div>
+    <h2 class="sec-title">What Our Passengers Say</h2>
+    <p class="sec-sub" style="margin-bottom:30px;">Real feedback from families we've driven across Chennai and beyond.</p>
+    <div class="review-grid" id="reviewGrid"></div>
+    <div style="text-align:center;margin-top:34px;">
+      <button class="btn-book-pkg" onclick="showModal('review')"><i class="fas fa-star"></i> Write a Review</button>
+    </div>
+  </section>
+</div>
+
+<!-- ================= SETTINGS (iframe) ================= -->
+<div id="settings" class="page-section">
+  <iframe id="settingsFrame" src="settings.html"></iframe>
+</div>
+
+<!-- FLOATING WHATSAPP -->
+<a class="fab-wa" href="https://wa.me/919789747965?text=Hi%20Divya%20Travels%2C%20I%27d%20like%20to%20book%20a%20trip." target="_blank" title="Chat on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+
+<!-- ================= LOGIN MODAL ================= -->
+<div class="modal-overlay" id="loginModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('login')"><i class="fas fa-times"></i></button>
+    <h2><i class="fas fa-user-circle"></i> Login</h2>
+    <div id="loginStep1">
+      <p class="sub">Enter your phone number to receive an OTP</p>
+      <div class="form-group"><label>Phone Number</label><input type="tel" id="loginPhone" maxlength="10" placeholder="10-digit number"></div>
+      <button class="btn-submit" onclick="sendOTP()"><i class="fas fa-paper-plane"></i> Send OTP</button>
+    </div>
+    <div id="loginStep2" style="display:none;">
+      <p class="sub">Enter the OTP sent to <b id="otpPhone" style="color:var(--ink);"></b></p>
+      <div class="otp-inputs">
+        <input maxlength="1" oninput="moveOTP(this,0)" id="otp1"><input maxlength="1" oninput="moveOTP(this,1)" id="otp2"><input maxlength="1" oninput="moveOTP(this,2)" id="otp3"><input maxlength="1" oninput="moveOTP(this,3)" id="otp4"><input maxlength="1" oninput="moveOTP(this,4)" id="otp5"><input maxlength="1" oninput="moveOTP(this,5)" id="otp6">
+      </div>
+      <button class="btn-submit" onclick="verifyOTP()"><i class="fas fa-check-circle"></i> Verify &amp; Login</button>
+      <p style="text-align:center;font-size:12px;color:var(--gray);margin-top:14px;">Demo OTP: 123456</p>
+    </div>
+  </div>
+</div>
+
+<!-- ================= BOOKING MODAL ================= -->
+<div class="modal-overlay" id="bookingModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('booking')"><i class="fas fa-times"></i></button>
+    <h2><i class="fas fa-taxi"></i> Book Your Trip</h2>
+    <p class="sub">Fill your details — we'll confirm over WhatsApp or Email.</p>
+    <div class="trip-summary"><b id="bkVehicle">Vehicle</b> &nbsp;·&nbsp; <span id="bkPrice"></span></div>
+    <div class="form-group"><label>Pickup Location</label><input type="text" id="bkPickup" placeholder="Your location"></div>
+    <div class="form-group"><label>Destination</label><input type="text" id="bkDest" placeholder="Where to?"></div>
+    <div class="form-group"><label>Date of Travel</label><input type="date" id="bkDate"></div>
+    <div class="form-group"><label>Your Name</label><input type="text" id="bkName" required></div>
+    <div class="form-group"><label>Phone Number</label><input type="tel" id="bkPhone" required></div>
+    <div class="book-btn-row">
+      <button class="btn-wa" onclick="bookViaWhatsApp()"><i class="fab fa-whatsapp"></i> Book via WhatsApp</button>
+      <button class="btn-mail" onclick="bookViaEmail()"><i class="fas fa-envelope"></i> Book via Email</button>
+    </div>
+  </div>
+</div>
+
+<!-- ================= PLACE PREVIEW MODAL (photo + enquiry) ================= -->
+<div class="modal-overlay" id="placePreviewModal">
+  <div class="modal place-preview-modal">
+    <button class="modal-close" onclick="closeModal('placePreview')"><i class="fas fa-times"></i></button>
+    <div class="place-preview-scroll">
+      <img id="ppImg" class="place-preview-img" src="" alt="">
+    </div>
+    <div class="place-preview-body">
+      <h3 id="ppTitle"></h3>
+      <p id="ppDesc"></p>
+      <button class="btn-enquiry" id="ppEnquiryBtn"><i class="fas fa-calendar-check"></i> Enquiry</button>
+    </div>
+  </div>
+</div>
+
+<!-- ================= REVIEW MODAL ================= -->
+<div class="modal-overlay" id="reviewModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('review')"><i class="fas fa-times"></i></button>
+    <h2><i class="fas fa-star"></i> Write a Review</h2>
+    <form id="reviewForm" onsubmit="submitReview(event)">
+      <div class="form-group"><label>Your Name</label><input type="text" id="revName" required></div>
+      <div class="form-group"><label>Rating</label>
+        <div style="font-size:26px;color:#ddd;cursor:pointer;" id="starRow">
+          <i class="fas fa-star" onclick="setRating(1)"></i><i class="fas fa-star" onclick="setRating(2)"></i><i class="fas fa-star" onclick="setRating(3)"></i><i class="fas fa-star" onclick="setRating(4)"></i><i class="fas fa-star" onclick="setRating(5)"></i>
+        </div>
+      </div>
+      <div class="form-group"><label>Your Review</label><textarea id="revText" rows="4" required placeholder="Share your trip experience..."></textarea></div>
+      <button type="submit" class="btn-submit"><i class="fas fa-paper-plane"></i> Submit Review</button>
+    </form>
+  </div>
+</div>
+
+<!-- ================= GALLERY LIGHTBOX ================= -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <button class="lightbox-close" onclick="closeLightbox(event)"><i class="fas fa-times"></i></button>
+  <div>
+    <img id="lightboxImg" src="" alt="">
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const WA_NUMBER = '919789747965';
+const MAIL_TO = 'shankarsinex@gmail.com';
+let currentVehicle = '', currentPrice = '', currentRating = 0;
+let currentCity = 'chennai';
+
+/* ---------- Navigation ---------- */
+function showSection(id, clickedLink){
+  document.querySelectorAll('.page-section').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+  document.querySelectorAll('#navLinks a').forEach(a=>a.classList.remove('active'));
+  if(clickedLink){ clickedLink.classList.add('active'); }
+  else { const m = document.querySelector(`#navLinks a[onclick*="showSection('${id}'"]`); if(m) m.classList.add('active'); }
+}
+function toggleMobileMenu(){
+  document.getElementById('mobileNav').classList.toggle('active');
+  document.getElementById('mobileOverlay').classList.toggle('active');
+}
+
+/* ---------- Notifications ---------- */
+function toggleNotif(){
+  const p = document.getElementById('notifPanel');
+  p.classList.toggle('show');
+  document.getElementById('notifBadge').style.display='none';
+}
+document.addEventListener('click', function(e){
+  const p = document.getElementById('notifPanel'), btn = document.getElementById('notifBtn');
+  if(p.classList.contains('show') && !p.contains(e.target) && !btn.contains(e.target)) p.classList.remove('show');
+});
+
+/* ---------- Explore: All-places combined block ----------
+   Builds a single grid with every place card from Chennai + Mamallapuram +
+   Kancheepuram (50). This is what "All" now shows, regardless of which city
+   tab is active. */
+function buildAllCombinedBlock(){
+  const combined = document.getElementById('city-allcombined');
+  if(!combined) return;
+  const grid = document.createElement('div');
+  grid.className = 'place-grid';
+
+  ['city-chennai','city-mamallapuram','city-kancheepuram'].forEach(id=>{
+    const block = document.getElementById(id);
+    if(!block) return;
+    block.querySelectorAll('.place-card').forEach(card=>{
+      grid.appendChild(card.cloneNode(true));
+    });
+  });
+
+  combined.appendChild(grid);
+}
+
+/* ---------- Explore: City tabs + Category filter ---------- */
+function showCity(city, el){
+  document.querySelectorAll('.city-tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  currentCity = city;
+  // Reset category to "All" whenever the city changes (All shows the combined 50-photo pool)
+  const firstCat = document.querySelector('.cat-tab');
+  filterCat('all', firstCat);
+}
+function filterCat(cat, el){
+  document.querySelectorAll('.cat-tab').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+
+  if(cat === 'all'){
+    document.querySelectorAll('.place-city-block').forEach(b=>b.classList.remove('active'));
+    const allBlock = document.getElementById('city-allcombined');
+    allBlock.classList.add('active');
+    allBlock.querySelectorAll('.place-card').forEach(card=>{ card.style.display=''; });
+    return;
+  }
+
+  document.querySelectorAll('.place-city-block').forEach(b=>b.classList.remove('active'));
+  const cityBlock = document.getElementById('city-'+currentCity);
+  if(!cityBlock) return;
+  cityBlock.classList.add('active');
+  cityBlock.querySelectorAll('.place-card').forEach(card=>{
+    if(cat==='all' || card.dataset.cat===cat){
+      card.style.display='';
+    } else {
+      card.style.display='none';
+    }
+  });
+}
+// Fallback: if any explore-place image fails to load, swap in a placeholder
+document.addEventListener('DOMContentLoaded', function(){
+  buildAllCombinedBlock();
+  const defaultCatBtn = document.querySelector('.cat-tab.active') || document.querySelector('.cat-tab');
+  filterCat(defaultCatBtn.dataset.cat, defaultCatBtn);
+  document.querySelectorAll('#explore .place-card img').forEach(img=>{
+    img.onerror = function(){
+      this.onerror = null;
+      this.src = 'https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=600';
+    };
+  });
+});
+
+/* ---------- Modals ---------- */
+function showModal(type){ document.getElementById(type+'Modal').classList.add('active'); }
+function closeModal(type){ document.getElementById(type+'Modal').classList.remove('active'); }
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') document.querySelectorAll('.modal-overlay').forEach(m=>m.classList.remove('active')); });
+
+/* ---------- Place Preview (photo popup on Popular Packages click) ---------- */
+function openPlacePreview(title, desc, img){
+  document.getElementById('ppImg').src = img;
+  document.getElementById('ppImg').alt = title;
+  document.getElementById('ppTitle').textContent = title;
+  document.getElementById('ppDesc').innerHTML = desc;
+  document.getElementById('ppEnquiryBtn').onclick = function(){
+    closeModal('placePreview');
+    openBooking(title, 'Enquiry — ' + title);
+  };
+  showModal('placePreview');
+}
+
+/* ---------- Login (demo OTP) ---------- */
+function sendOTP(){
+  const phone = document.getElementById('loginPhone').value.trim();
+  if(phone.length!==10){ showToast('Enter a valid 10-digit number!','error'); return; }
+  document.getElementById('otpPhone').textContent = phone;
+  document.getElementById('loginStep1').style.display='none';
+  document.getElementById('loginStep2').style.display='block';
+  showToast('OTP sent! (Demo: 123456)','success');
+}
+function moveOTP(input,i){ if(input.value.length===1){ const n=document.getElementById('otp'+(i+2)); if(n) n.focus(); } }
+function verifyOTP(){
+  const otp = ['otp1','otp2','otp3','otp4','otp5','otp6'].map(id=>document.getElementById(id).value).join('');
+  if(otp==='123456'){
+    const phone = document.getElementById('loginPhone').value;
+    const u = JSON.parse(localStorage.getItem('divyaUser')||'null') || {};
+    const user = {name: u.name || 'User', phone, email: u.email || '', address: u.address || ''};
+    localStorage.setItem('divyaUser', JSON.stringify(user));
+    document.getElementById('loginBtn').textContent = 'Hi, ' + (user.name!=='User'?user.name:'User');
+    document.getElementById('loginBtn').onclick = ()=>showSection('settings');
+    closeModal('login');
+    showToast('Login successful! 🎉','success');
+  } else showToast('Invalid OTP! Try 123456.','error');
+}
+
+/* ---------- Booking flow ---------- */
+function openBooking(vehicleName, price){
+  currentVehicle = vehicleName; currentPrice = price;
+  document.getElementById('bkVehicle').textContent = vehicleName;
+  document.getElementById('bkPrice').textContent = price;
+  const u = JSON.parse(localStorage.getItem('divyaUser')||'null');
+  if(u){ document.getElementById('bkName').value = u.name!=='User'?u.name:''; document.getElementById('bkPhone').value = u.phone||''; }
+  showModal('booking');
+}
+function openBookingFromSearch(){
+  const pickup = document.getElementById('pickupInput').value.trim();
+  const dest = document.getElementById('destInput').value.trim();
+  if(!pickup || !dest){ showToast('Please enter both pickup and destination!','error'); return; }
+  openBooking('City Ride', 'From ₹12/km');
+  document.getElementById('bkPickup').value = pickup;
+  document.getElementById('bkDest').value = dest;
+}
+function buildBookingMessage(){
+  const pickup = document.getElementById('bkPickup').value.trim() || '-';
+  const dest = document.getElementById('bkDest').value.trim() || '-';
+  const date = document.getElementById('bkDate').value || '-';
+  const name = document.getElementById('bkName').value.trim();
+  const phone = document.getElementById('bkPhone').value.trim();
+  if(!name || !phone){ showToast('Please enter your name and phone number!','error'); return null; }
+  return `New Booking Request - Divya Travels%0A%0AVehicle/Package: ${encodeURIComponent(currentVehicle)}%0APrice: ${encodeURIComponent(currentPrice)}%0APickup: ${encodeURIComponent(pickup)}%0ADestination: ${encodeURIComponent(dest)}%0ADate: ${encodeURIComponent(date)}%0A%0AName: ${encodeURIComponent(name)}%0APhone: ${encodeURIComponent(phone)}`;
+}
+function bookViaWhatsApp(){
+  const msg = buildBookingMessage();
+  if(!msg) return;
+  window.open(`https://wa.me/${WA_NUMBER}?text=${msg}`, '_blank');
+  showToast('Opening WhatsApp to confirm your booking...','success');
+  closeModal('booking');
+}
+function bookViaEmail(){
+  const pickup = document.getElementById('bkPickup').value.trim() || '-';
+  const dest = document.getElementById('bkDest').value.trim() || '-';
+  const date = document.getElementById('bkDate').value || '-';
+  const name = document.getElementById('bkName').value.trim();
+  const phone = document.getElementById('bkPhone').value.trim();
+  if(!name || !phone){ showToast('Please enter your name and phone number!','error'); return; }
+  const subject = encodeURIComponent('New Booking Request - Divya Travels');
+  const body = encodeURIComponent(`Vehicle/Package: ${currentVehicle}\nPrice: ${currentPrice}\nPickup: ${pickup}\nDestination: ${dest}\nDate: ${date}\n\nName: ${name}\nPhone: ${phone}`);
+  window.location.href = `mailto:${MAIL_TO}?subject=${subject}&body=${body}`;
+  closeModal('booking');
+}
+
+/* ---------- Contact form ---------- */
+function submitContactForm(e){
+  e.preventDefault();
+  const name = document.getElementById('cName').value.trim();
+  const phone = document.getElementById('cPhone').value.trim();
+  const msg = document.getElementById('cMsg').value.trim();
+  const text = `New Contact Message - Divya Travels%0A%0AName: ${encodeURIComponent(name)}%0APhone: ${encodeURIComponent(phone)}%0AMessage: ${encodeURIComponent(msg)}`;
+  window.open(`https://wa.me/${WA_NUMBER}?text=${text}`, '_blank');
+  showToast('Opening WhatsApp to send your message...','success');
+  e.target.reset();
+}
+
+/* ---------- Reviews ---------- */
+const defaultReviews = [
+  {name:'Ramesh K.', rating:5, text:"Shankar sir's driving is so safe and smooth — 35 years of experience really shows. Took our family to Kancheepuram, covered all 10 temples comfortably in one day!"},
+  {name:'Priya S.', rating:5, text:"Booked the Mamallapuram trip, on-time pickup and very friendly service throughout. Highly recommend Divya Travels for temple tours."},
+  {name:'Anand M.', rating:5, text:"Used Divya Travels for a Chennai airport drop, punctual and the car was spotless. Will definitely book again."},
+  {name:'Lakshmi R.', rating:4, text:"Great experience for our Kanchipuram temple visit — driver knew all the temples well and even suggested the best order to visit them."},
+  {name:'Karthik V.', rating:5, text:"Booked a sedan for a family function, smooth ride and very courteous driver. 5 stars!"},
+  {name:'Meena T.', rating:5, text:"Trusted Divya Travels for our full-day temple tour, safe driving throughout, will book again for our next trip."}
+];
+function loadReviewsList(){
+  try{ const saved = JSON.parse(localStorage.getItem('divyaReviews')||'null'); if(Array.isArray(saved) && saved.length) return saved; }catch(e){}
+  return [];
+}
+function renderReviews(){
+  const all = [...loadReviewsList(), ...defaultReviews];
+  document.getElementById('reviewGrid').innerHTML = all.map(r=>`
+    <div class="review-card">
+      <div class="review-head"><div class="review-avatar">${r.name.charAt(0).toUpperCase()}</div><div><h5>${r.name}</h5><div class="stars">${'★'.repeat(r.rating)}${'☆'.repeat(5-r.rating)}</div></div></div>
+      <p>${r.text}</p>
+    </div>`).join('');
+}
+function setRating(n){ currentRating=n; const stars=document.getElementById('starRow').children; for(let i=0;i<5;i++) stars[i].style.color = i<n ? '#F2A900':'#ddd'; }
+function submitReview(e){
+  e.preventDefault();
+  if(currentRating===0){ showToast('Please select a rating!','error'); return; }
+  const name = document.getElementById('revName').value.trim();
+  const text = document.getElementById('revText').value.trim();
+  const list = loadReviewsList();
+  list.unshift({name, rating:currentRating, text});
+  localStorage.setItem('divyaReviews', JSON.stringify(list));
+  renderReviews();
+  closeModal('review');
+  showToast('Review submitted! Thank you 🌟','success');
+  e.target.reset();
+  currentRating=0;
+}
+
+/* ---------- Gallery ---------- */
+const galleryPhotos = [
+  {src:'gallery_photos/gallery/photo20.jpg', cat:'city',     title:'City Ride',        loc:'Chennai'},
+  {src:'gallery_photos/gallery/photo13.jpg', cat:'city',     title:'City Ride',        loc:'Chennai'},
+  {src:'gallery_photos/gallery/photo03.jpg', cat:'city',     title:'City Ride',        loc:'Chennai'},
+  {src:'gallery_photos/gallery/photo21.jpeg', cat:'city',     title:'City Ride',        loc:'Chennai'},
+  {src:'gallery_photos/gallery/photo05.jpg', cat:'city',     title:'City Ride',        loc:'Chennai'},
+  {src:'gallery_photos/gallery/photo22.jpeg', cat:'city',     title:'City Ride',        loc:'Chennai'},
+  {src:'gallery_photos/gallery/photo07.jpg', cat:'temple',   title:'Temple Tour',      loc:'Kancheepuram'},
+  {src:'gallery_photos/gallery/photo08.jpg', cat:'temple',   title:'Temple Tour',      loc:'Kancheepuram'},
+  {src:'gallery_photos/gallery/photo09.jpg', cat:'temple',   title:'Temple Tour',      loc:'Kancheepuram'},
+  {src:'gallery_photos/gallery/photo10.jpg', cat:'temple',   title:'Temple Tour',      loc:'Mamallapuram'},
+  {src:'gallery_photos/gallery/photo11.jpg', cat:'temple',   title:'Temple Tour',      loc:'Mamallapuram'},
+  {src:'gallery_photos/gallery/photo12.jpg', cat:'temple',   title:'Temple Tour',      loc:'Mamallapuram'},
+  {src:'gallery_photos/gallery/photo04.jpg', cat:'temple',   title:'Temple Tour',      loc:'Mamallapuram'},
+  {src:'gallery_photos/gallery/photo14.jpg', cat:'function', title:'Function / Event', loc:'Chennai'},
+  {src:'gallery_photos/gallery/photo15.jpg', cat:'function', title:'Function / Event', loc:'Chennai'},
+  {src:'gallery_photos/gallery/photo16.jpg', cat:'function', title:'Function / Event', loc:'Chennai'},
+  {src:'gallery_photos/gallery/photo01.jpg', cat:'function', title:'Function / Event', loc:'Chennai'},
+  {src:'gallery_photos/gallery/photo18.jpg', cat:'function', title:'Function / Event', loc:'Chennai'},
+  {src:'gallery_photos/gallery/photo19.jpg', cat:'function', title:'Function / Event', loc:'Chennai'},
+  {src:'gallery_photos/gallery/photo17.jpg', cat:'function', title:'Function / Event', loc:'Chennai'}
+];
+
+let currentGalleryList = galleryPhotos;
+let galleryFilterState = 'all';
+function renderGallery(){
+  const grid = document.getElementById('galleryGrid');
+  if(!grid) return;
+  currentGalleryList = galleryFilterState==='all' ? galleryPhotos : galleryPhotos.filter(p=>p.cat===galleryFilterState);
+  grid.innerHTML = currentGalleryList.map((p,i)=>`
+    <div class="g-item" onclick="openLightbox(${i})">
+      <img src="${p.src}" alt="${p.title}" loading="lazy">
+    </div>`).join('');
+}
+function filterGallery(cat, el){
+  galleryFilterState = cat;
+  document.querySelectorAll('.g-filter-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  renderGallery();
+}
+function openLightbox(i){
+  const p = currentGalleryList[i];
+  if(!p) return;
+  document.getElementById('lightboxImg').src = p.src;
+  document.getElementById('lightbox').classList.add('active');
+}
+function closeLightbox(e){
+  if(e.target.id==='lightbox' || e.target.closest('.lightbox-close')) document.getElementById('lightbox').classList.remove('active');
+}
+
+/* ---------- Toast ---------- */
+function showToast(msg, type){
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.className = 'toast ' + (type||'');
+  setTimeout(()=>t.classList.add('show'),10);
+  setTimeout(()=>t.classList.remove('show'),3000);
+}
+
+/* ---------- Init ---------- */
+window.addEventListener('message', function(event){
+  const data = event.data || {};
+  if(data.divyaOpenLogin) showModal('login');
+  if(data.divyaLogout){
+    document.getElementById('loginBtn').textContent = 'Login';
+    document.getElementById('loginBtn').onclick = ()=>showModal('login');
+  }
+  if(data.divyaNav) showSection(data.divyaNav);
+});
+document.addEventListener('DOMContentLoaded', function(){
+  renderReviews();
+  renderGallery();
+  try{
+    const u = JSON.parse(localStorage.getItem('divyaUser')||'null');
+    if(u && u.phone){
+      document.getElementById('loginBtn').textContent = 'Hi, ' + (u.name!=='User'&&u.name?u.name:'User');
+      document.getElementById('loginBtn').onclick = ()=>showSection('settings');
+    }
+  }catch(e){}
+});
+</script>
+</body>
+</html>
